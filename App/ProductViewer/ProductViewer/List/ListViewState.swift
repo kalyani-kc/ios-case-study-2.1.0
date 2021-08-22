@@ -21,10 +21,32 @@ struct ListItemViewState: TempoViewStateItem, Equatable {
     let title: String
     let price: String
     let image: UIImage?
+    let prodId: String
 }
 
 func ==(lhs: ListItemViewState, rhs: ListItemViewState) -> Bool {
     return lhs.title == rhs.title
         && lhs.price == rhs.price
+        && lhs.image == rhs.image
+        && lhs.prodId == rhs.prodId
+}
+
+struct DetailViewState: TempoViewState, TempoSectionedViewState {
+    var listItems: [TempoViewStateItem]
+    
+    var sections: [TempoViewStateItem] {
+        return listItems
+    }
+}
+
+struct DetailItemViewState: TempoViewStateItem, Equatable {
+    let desc: String
+    let price: String
+    let image: UIImage?
+}
+
+func ==(lhs: DetailItemViewState, rhs: DetailItemViewState) -> Bool {
+    return lhs.price == rhs.price
+        && lhs.desc == rhs.desc
         && lhs.image == rhs.image
 }
