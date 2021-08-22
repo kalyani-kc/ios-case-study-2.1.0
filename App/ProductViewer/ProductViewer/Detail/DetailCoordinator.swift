@@ -38,13 +38,13 @@ class DetailCoordinator: TempoCoordinator {
     lazy var viewController: DetailViewController = {
         return DetailViewController()
     }()
-    var serviceHelper: ServiceEntity?
+    var serviceHelper: DealsDetailsServiceEntity?
     
     // MARK: Init
     
     required init(detailID: String) {
         viewState = DetailViewState(listItems: [])
-        serviceHelper = Service()
+        serviceHelper = DealsDetailsService()
         updateState(for: Int(detailID) ?? 0)
     }
     

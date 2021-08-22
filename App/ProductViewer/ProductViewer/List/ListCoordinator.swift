@@ -36,7 +36,7 @@ class ListCoordinator: TempoCoordinator {
     lazy var viewController: ListViewController = {
         return ListViewController.viewControllerFor(coordinator: self)
     }()
-    var serviceHelper: ServiceEntity?
+    var serviceHelper: DealsServiceEntity?
     
     var detailCoordinator: DetailCoordinator?
     
@@ -44,7 +44,7 @@ class ListCoordinator: TempoCoordinator {
     
     required init() {
         viewState = ListViewState(listItems: [])
-        serviceHelper = Service()
+        serviceHelper = DealsService()
         updateState()
         registerListeners()
     }
