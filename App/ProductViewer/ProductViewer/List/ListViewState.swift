@@ -20,7 +20,7 @@ struct ListViewState: TempoViewState, TempoSectionedViewState {
 struct ListItemViewState: TempoViewStateItem, Equatable {
     let title: String
     let price: String
-    let image: UIImage?
+    let image: URL?
     let prodId: String
 }
 
@@ -42,7 +42,7 @@ struct DetailViewState: TempoViewState, TempoSectionedViewState {
 struct DetailItemViewState: TempoViewStateItem, Equatable {
     let desc: String
     let price: String
-    let image: UIImage?
+    let image: URL?
 }
 
 func ==(lhs: DetailItemViewState, rhs: DetailItemViewState) -> Bool {

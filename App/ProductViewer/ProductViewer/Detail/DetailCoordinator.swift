@@ -8,6 +8,7 @@
 
 import Foundation
 import Tempo
+import SDWebImage
 
 /*
  Coordinator for the product detail
@@ -68,7 +69,7 @@ class DetailCoordinator: TempoCoordinator {
                 
                 let state = DetailItemViewState.init(desc: product.description ?? product.title,
                                                      price: product.regularPrice.displayPrice,
-                                                     image: UIImage.init(named: "1"))
+                                                     image: URL.init(string: product.imageURL))
                 self?.viewState.listItems = [state] as [DetailItemViewState]
                 vc.viewState = state
                 rootVC.present(vc,

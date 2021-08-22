@@ -43,22 +43,22 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="tAb-Dy-veG">
-                                            <rect key="frame" x="16" y="258.5" width="382" height="84"/>
+                                            <rect key="frame" x="16" y="228.5" width="382" height="114"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mja-nR-SC9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="55"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="PO8-yc-WY0"/>
+                                                        <constraint firstAttribute="height" constant="55" id="PO8-yc-WY0"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                     <state key="normal" title="Add to cart"/>
                                                     <connections>
                                                         <action selector="addToCart:" destination="-1" eventType="touchUpInside" id="Evd-Ie-qKL"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HE-40-exU">
-                                                    <rect key="frame" x="0.0" y="44" width="382" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <rect key="frame" x="0.0" y="59" width="382" height="55"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                     <state key="normal" title="Add to List"/>
                                                     <connections>
                                                         <action selector="addToList:" destination="-1" eventType="touchUpInside" id="0d1-Ry-HHe"/>

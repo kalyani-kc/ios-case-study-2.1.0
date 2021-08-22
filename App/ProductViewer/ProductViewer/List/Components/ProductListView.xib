@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="347" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="Z4l-Mx-TSZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="Z4l-Mx-TSZ">
                     <rect key="frame" x="5" y="5" width="140" height="140"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Z4l-Mx-TSZ" secondAttribute="height" multiplier="1:1" id="7WG-P7-bew"/>

@@ -8,6 +8,7 @@
 
 import Foundation
 import Tempo
+import SDWebImage
 
 class DetailViewController: UIViewController {
     fileprivate var coordinator: TempoCoordinator!
@@ -26,7 +27,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        productImage.image = viewState?.image
         productPrice.text = viewState?.price
         productDesc.text = viewState?.desc
         buttonAddToCart.setTitle("add to cart", for: .normal)
@@ -37,6 +37,12 @@ class DetailViewController: UIViewController {
         buttonAddToList.tintColor = .targetBlackFridayCharcoalColor
         buttonAddToCart.layer.cornerRadius = 4
         buttonAddToList.layer.cornerRadius = 4
+        SDWebImageManager.shared.loadImage(with: viewState?.image,
+                                           options: .highPriority,
+                                           progress: nil,
+                                           completed: { [weak self] (image,_,_,_,_,_)  in
+                                            self?.productImage.image = image
+                                           })
     }
     
     override func viewDidAppear(_ animated: Bool) {

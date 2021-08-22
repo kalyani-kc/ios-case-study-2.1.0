@@ -65,7 +65,7 @@ class ListCoordinator: TempoCoordinator {
                 self?.viewState.listItems = prods.map({ (product) -> ListItemViewState in
                     ListItemViewState(title: product.title,
                                       price: product.regularPrice.displayPrice,
-                                      image: UIImage(named: "1"),
+                                      image: URL.init(string: product.imageURL),
                                       prodId: String(product.id))
                 }) as [ListItemViewState]
             }
