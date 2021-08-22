@@ -38,6 +38,8 @@ class ListCoordinator: TempoCoordinator {
     }()
     var serviceHelper: ServiceEntity?
     
+    var detailCoordinator: DetailCoordinator?
+    
     // MARK: Init
     
     required init() {
@@ -51,9 +53,7 @@ class ListCoordinator: TempoCoordinator {
     
     fileprivate func registerListeners() {
         dispatcher.addObserver(ListItemPressed.self) { [weak self] e in
-            let alert = UIAlertController(title: "Item selected!", message: "🐶", preferredStyle: .alert)
-            alert.addAction( UIAlertAction(title: "OK", style: .cancel, handler: nil) )
-            self?.viewController.present(alert, animated: true, completion: nil)
+            self?.detailCoordinator = DetailCoordinator(detailID: e.item.prodId)
         }
     }
     
@@ -65,7 +65,8 @@ class ListCoordinator: TempoCoordinator {
                 self?.viewState.listItems = prods.map({ (product) -> ListItemViewState in
                     ListItemViewState(title: product.title,
                                       price: product.regularPrice.displayPrice,
-                                      image: UIImage(named: "1"))
+                                      image: UIImage(named: "1"),
+                                      prodId: String(product.id))
                 }) as [ListItemViewState]
             }
         })

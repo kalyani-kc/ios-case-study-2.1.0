@@ -22,14 +22,13 @@ class ListViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let harmonyLayout = HarmonyLayout()
         
-        harmonyLayout.collectionViewMargins = HarmonyLayoutMargins(top: .narrow, right: .none, bottom: .narrow, left: .none)
-        harmonyLayout.defaultSectionMargins = HarmonyLayoutMargins(top: .narrow, right: .none, bottom: .none, left: .none)
+        harmonyLayout.collectionViewMargins = HarmonyLayoutMargins(top: .wide, right: .none, bottom: .narrow, left: .none)
+        harmonyLayout.defaultSectionMargins = HarmonyLayoutMargins(top: .wide, right: .none, bottom: .none, left: .none)
         
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: harmonyLayout)
-        collectionView.backgroundColor = .targetFadeAwayGrayColor
+        collectionView.backgroundColor = .targetStarkWhiteColor
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.alwaysBounceVertical = true
-        
         return collectionView
     }()
     
@@ -37,7 +36,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
 
         view.addAndPinSubview(collectionView)
-        collectionView.contentInset = UIEdgeInsets(top: 20.0, left: 0.0, bottom: 0.0, right: 0.0)
+        collectionView.contentInset = UIEdgeInsets(top: 20.0, left: 0.0, bottom: 20.0, right: 0.0)
         
         title = "checkout"
         

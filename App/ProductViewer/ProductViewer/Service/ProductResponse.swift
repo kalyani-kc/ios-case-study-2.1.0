@@ -33,6 +33,7 @@ struct Product: Decodable {
     var aisle: String
     var imageURL: String
     var regularPrice: Price
+    var description: String?
     
     private enum CodingKeys: String, CodingKey {
         typealias RawValue = String
@@ -41,6 +42,7 @@ struct Product: Decodable {
         case aisle
         case imageURL = "image_url"
         case regularPrice = "regular_price"
+        case description
     }
     init(from decoder: Decoder) throws {
         let product = try decoder.container(keyedBy: CodingKeys.self)
@@ -49,6 +51,7 @@ struct Product: Decodable {
         aisle = try product.decode(String.self, forKey: .aisle)
         imageURL = try product.decode(String.self, forKey: .imageURL)
         regularPrice = try product.decode(Price.self, forKey: .regularPrice)
+        description = try product.decode(String.self, forKey: .description)
     }
 }
 
