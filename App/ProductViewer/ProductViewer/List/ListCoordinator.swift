@@ -59,8 +59,10 @@ class ListCoordinator: TempoCoordinator {
     
     func updateState() {
         var deals: Deals?
+        viewController.showProgressView()
         serviceHelper?.getListOfDeals(completion: { [weak self] (response, error) in
             deals = response
+            self?.viewController.hideProgressView()
             if let prods = deals?.products {
                 self?.viewState.listItems = prods.compactMap({ (product) -> ListItemViewState in
                     ListItemViewState(title: product.title,

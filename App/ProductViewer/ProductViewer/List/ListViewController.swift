@@ -9,6 +9,7 @@ import UIKit
 import Tempo
 
 class ListViewController: UIViewController {
+    var progressView: UIActivityIndicatorView?
     
     class func viewControllerFor(coordinator: TempoCoordinator) -> ListViewController {
         let viewController = ListViewController()
@@ -53,7 +54,28 @@ class ListViewController: UIViewController {
         ]
 
     }
+    func showProgressView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.progressView = UIActivityIndicatorView.init(style: .large)
+            if let activityIndicator = self?.progressView,
+               let center = self?.view.center {
+                self?.progressView?.center = center
+                self?.progressView?.isHidden = false
+                self?.view.addSubview(activityIndicator)
+                self?.progressView?.startAnimating()
+            }
+        }
+    }
     
+    func hideProgressView() {
+        DispatchQueue.main.async { [weak self] in
+            if self?.progressView != nil {
+                self?.progressView?.stopAnimating()
+                self?.progressView?.isHidden = true
+                self?.progressView?.removeFromSuperview()
+            }
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         
     }
