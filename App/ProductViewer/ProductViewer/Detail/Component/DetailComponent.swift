@@ -19,15 +19,31 @@ struct DetailComponent: Component {
     
     func configureView(_ view: DetailView, item: DetailItemViewState){
         view.descLabel.text = item.desc
-        view.productPrice.text = item.price
+        if let salePrice = item.salePrice {
+            let saleAttribute = [NSAttributedString.Key.foregroundColor : UIColor.targetBullseyeRedColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+            let salePriceStr = NSMutableAttributedString(string: salePrice,
+                                                         attributes: saleAttribute)
+            let strikeAttribute = [NSAttributedString.Key.strikethroughColor : UIColor.targetBullseyeRedColor,
+                                   NSAttributedString.Key.strikethroughStyle:  NSUnderlineStyle.single.rawValue] as [NSAttributedString.Key : Any]
+            let actualPriceStr = NSMutableAttributedString(string: item.price + " ",
+                                                           attributes: strikeAttribute)
+            actualPriceStr.append(NSMutableAttributedString(string: " Now "))
+            actualPriceStr.append(salePriceStr)
+            view.productPrice.attributedText = actualPriceStr
+            
+        } else {
+            view.productPrice.text = item.price
+        }
         view.backgroundColor = UIColor.targetStarkWhiteColor
+        
         view.buttonAddToCart.setTitle("add to cart", for: .normal)
-        view.buttonAddToList.setTitle("add to list", for: .normal)
         view.buttonAddToCart.backgroundColor = .targetBullseyeRedColor
-        view.buttonAddToList.backgroundColor = .targetStrokeGrayColor
         view.buttonAddToCart.tintColor = .targetStarkWhiteColor
-        view.buttonAddToList.tintColor = .targetBlackFridayCharcoalColor
         view.buttonAddToCart.layer.cornerRadius = 4
+
+        view.buttonAddToList.backgroundColor = .targetStrokeGrayColor
+        view.buttonAddToList.setTitle("add to list", for: .normal)
+        view.buttonAddToList.tintColor = .targetBlackFridayCharcoalColor
         view.buttonAddToList.layer.cornerRadius = 4
         
         SDWebImageManager.shared.loadImage(with: item.image,

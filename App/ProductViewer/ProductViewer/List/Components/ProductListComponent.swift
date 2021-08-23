@@ -37,7 +37,13 @@ struct ProductListComponent: Component {
     
     func configureView(_ view: ProductListView, item: ListItemViewState) {
         view.titleLabel.text = item.title
-        view.priceLabel.text = item.price
+        if let salePrice = item.salePrice {
+            view.priceLabel.text = salePrice
+            view.priceLabel.textColor = .targetBullseyeRedColor
+        } else {
+            view.priceLabel.text = item.price
+            view.priceLabel.textColor = .targetBlackFridayCharcoalColor
+        }
         view.layer.cornerRadius = 8
         view.layer.borderColor = UIColor.targetStrokeGrayColor.cgColor
         view.backgroundColor = UIColor.targetStarkWhiteColor

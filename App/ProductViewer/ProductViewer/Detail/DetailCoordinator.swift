@@ -71,7 +71,8 @@ class DetailCoordinator: TempoCoordinator {
                 
                 let state = DetailItemViewState.init(desc: product.description ?? product.title,
                                                      price: product.regularPrice.displayPrice,
-                                                     image: URL.init(string: product.imageURL))
+                                                     image: URL.init(string: product.imageURL),
+                                                     salePrice: product.salePrice?.displayPrice)
                 self?.viewState.listItems = [state] as [DetailItemViewState]
                 rootVC.present(vc,
                                animated: true,

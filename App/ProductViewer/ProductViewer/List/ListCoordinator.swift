@@ -62,11 +62,12 @@ class ListCoordinator: TempoCoordinator {
         serviceHelper?.getListOfDeals(completion: { [weak self] (response, error) in
             deals = response
             if let prods = deals?.products {
-                self?.viewState.listItems = prods.map({ (product) -> ListItemViewState in
+                self?.viewState.listItems = prods.compactMap({ (product) -> ListItemViewState in
                     ListItemViewState(title: product.title,
                                       price: product.regularPrice.displayPrice,
                                       image: URL.init(string: product.imageURL),
-                                      prodId: String(product.id))
+                                      prodId: String(product.id),
+                                      salePrice: product.salePrice?.displayPrice)
                 }) as [ListItemViewState]
             }
         })
