@@ -44,7 +44,8 @@ class ListViewController: UIViewController {
             ProductListComponent()
         ]
         
-        let componentProvider = ComponentProvider(components: components, dispatcher: coordinator.dispatcher)
+        let componentProvider = ComponentProvider(components: components,
+                                                  dispatcher: coordinator.dispatcher)
         let collectionViewAdapter = CollectionViewAdapter(collectionView: collectionView, componentProvider: componentProvider)
         
         coordinator.presenters = [

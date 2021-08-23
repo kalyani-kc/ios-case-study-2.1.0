@@ -38,11 +38,3 @@ struct DetailComponent: Component {
                                            })
     }
 }
-
-extension DetailComponent: HarmonyLayoutComponent {
-//    func heightForLayout(_ layout: HarmonyLayout,
-//                         item: TempoViewStateItem,
-//                         width: CGFloat) -> CGFloat {
-//
-//    }
-}
