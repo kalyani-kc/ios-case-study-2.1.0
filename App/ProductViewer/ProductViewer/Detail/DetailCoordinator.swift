@@ -35,9 +35,11 @@ class DetailCoordinator: TempoCoordinator {
     }
     
     let dispatcher = Dispatcher()
-    lazy var viewController: DetailViewController = {
-        return DetailViewController()
+    
+    lazy var detailViewController: DetailListViewController = {
+        return DetailListViewController.viewControllerFor(coordinator: self)
     }()
+    
     var serviceHelper: DealsDetailsServiceEntity?
     
     // MARK: Init
@@ -65,13 +67,12 @@ class DetailCoordinator: TempoCoordinator {
     func setupDetailsView(for product: Product) {
         DispatchQueue.main.async { [weak self] in
             if  let rootVC = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController,
-                let vc = self?.viewController {
+                let vc = self?.detailViewController {
                 
                 let state = DetailItemViewState.init(desc: product.description ?? product.title,
                                                      price: product.regularPrice.displayPrice,
                                                      image: URL.init(string: product.imageURL))
                 self?.viewState.listItems = [state] as [DetailItemViewState]
-                vc.viewState = state
                 rootVC.present(vc,
                                animated: true,
                                completion: nil)

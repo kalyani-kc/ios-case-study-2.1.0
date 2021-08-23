@@ -8,52 +8,63 @@
 
 import Foundation
 import Tempo
-import SDWebImage
 
-class DetailViewController: UIViewController {
-    fileprivate var coordinator: TempoCoordinator!
-    @IBOutlet weak var productImage: UIImageView!
-    @IBOutlet weak var productPrice: UILabel!
-    @IBOutlet weak var productDesc: UILabel!
-    @IBOutlet weak var buttonAddToCart: UIButton!
-    @IBOutlet weak var buttonAddToList: UIButton!
-    var viewState: DetailItemViewState?
+class DetailListViewController: UIViewController {
     
-    class func viewControllerFor(coordinator: TempoCoordinator) -> DetailViewController {
-        let viewController = DetailViewController()
+    class func viewControllerFor(coordinator: TempoCoordinator) -> DetailListViewController {
+        let viewController = DetailListViewController()
         viewController.coordinator = coordinator
+        
         return viewController
     }
     
+    fileprivate var coordinator: TempoCoordinator!
+    
+    lazy var collectionView: UICollectionView = {
+        let harmonyLayout = HarmonyLayout()
+        
+        harmonyLayout.collectionViewMargins = HarmonyLayoutMargins(top: .none,
+                                                                   right: .none,
+                                                                   bottom: .narrow,
+                                                                   left: .none)
+        harmonyLayout.defaultSectionMargins = HarmonyLayoutMargins(top: .none,
+                                                                   right: .none,
+                                                                   bottom: .none,
+                                                                   left: .none)
+        harmonyLayout.defaultItemMargins = HarmonyLayoutMargins(top: .none,
+                                                                right: .none,
+                                                                bottom: .none,
+                                                                left: .none)
+        harmonyLayout.defaultItemHeight = self.view.bounds.height
+        
+        let collectionView = UICollectionView(frame: CGRect.zero,
+                                              collectionViewLayout: harmonyLayout)
+        collectionView.backgroundColor = .targetStarkWhiteColor
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.alwaysBounceVertical = true
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        productPrice.text = viewState?.price
-        productDesc.text = viewState?.desc
-        buttonAddToCart.setTitle("add to cart", for: .normal)
-        buttonAddToList.setTitle("add to list", for: .normal)
-        buttonAddToCart.backgroundColor = .targetBullseyeRedColor
-        buttonAddToList.backgroundColor = .targetStrokeGrayColor
-        buttonAddToCart.tintColor = .targetStarkWhiteColor
-        buttonAddToList.tintColor = .targetBlackFridayCharcoalColor
-        buttonAddToCart.layer.cornerRadius = 4
-        buttonAddToList.layer.cornerRadius = 4
-        SDWebImageManager.shared.loadImage(with: viewState?.image,
-                                           options: .highPriority,
-                                           progress: nil,
-                                           completed: { [weak self] (image,_,_,_,_,_)  in
-                                            self?.productImage.image = image
-                                           })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //
-    }
+        view.addAndPinSubview(collectionView)
+        collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+                
+        let components: [ComponentType] = [
+            DetailComponent()
+        ]
+        
+        let componentProvider = ComponentProvider(components: components,
+                                                  dispatcher: coordinator.dispatcher)
+        let collectionViewAdapter = CollectionViewAdapter(collectionView: collectionView, componentProvider: componentProvider)
+        
+        coordinator.presenters = [
+            SectionPresenter(adapter: collectionViewAdapter),
+        ]
 
-    @IBAction func addToCart(_ sender: Any) {
-        //
     }
-    @IBAction func addToList(_ sender: Any) {
-        //
-    }
-    
 }
+
