@@ -17,20 +17,23 @@ struct DetailComponent: Component {
         // Called on first view
     }
     
+    fileprivate func configureSalePrice(_ salePrice: String, _ item: DetailItemViewState, _ view: DetailView) {
+        let saleAttribute = [NSAttributedString.Key.foregroundColor : UIColor.targetBullseyeRedColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        let salePriceStr = NSMutableAttributedString(string: salePrice,
+                                                     attributes: saleAttribute)
+        let strikeAttribute = [NSAttributedString.Key.strikethroughColor : UIColor.targetBullseyeRedColor,
+                               NSAttributedString.Key.strikethroughStyle:  NSUnderlineStyle.single.rawValue] as [NSAttributedString.Key : Any]
+        let actualPriceStr = NSMutableAttributedString(string: item.price + " ",
+                                                       attributes: strikeAttribute)
+        actualPriceStr.append(NSMutableAttributedString(string: " Now "))
+        actualPriceStr.append(salePriceStr)
+        view.productPrice.attributedText = actualPriceStr
+    }
+    
     func configureView(_ view: DetailView, item: DetailItemViewState){
         view.descLabel.text = item.desc
         if let salePrice = item.salePrice {
-            let saleAttribute = [NSAttributedString.Key.foregroundColor : UIColor.targetBullseyeRedColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
-            let salePriceStr = NSMutableAttributedString(string: salePrice,
-                                                         attributes: saleAttribute)
-            let strikeAttribute = [NSAttributedString.Key.strikethroughColor : UIColor.targetBullseyeRedColor,
-                                   NSAttributedString.Key.strikethroughStyle:  NSUnderlineStyle.single.rawValue] as [NSAttributedString.Key : Any]
-            let actualPriceStr = NSMutableAttributedString(string: item.price + " ",
-                                                           attributes: strikeAttribute)
-            actualPriceStr.append(NSMutableAttributedString(string: " Now "))
-            actualPriceStr.append(salePriceStr)
-            view.productPrice.attributedText = actualPriceStr
-            
+            configureSalePrice(salePrice, item, view)
         } else {
             view.productPrice.text = item.price
         }
